@@ -1,0 +1,49 @@
+#include<iostream.h>
+#include<string>
+struct Question {
+    string QuestionText;
+    string options[4];
+    int correctOption;
+};
+void askQuestion(const Question &q, int &score) {
+    cout << q.questionText << endl;
+    for (int i = 0; i < 4; i++) {
+        cout << i + 1 << ". " << q.options[i] << endl;
+    }
+    int userAnswer;
+    cout << "Your answer (1-4): ";
+    cin >> userAnswer;
+    if (userAnswer == q.correctOption) {
+        cout << "Correct!\n";
+        score++;
+    } else {
+        cout << "Wrong! The correct answer was " << q.correctOption << ". " << q.options[q.correctOption - 1] << "\n";
+    }
+    cout << endl;
+}
+int main() {
+    Question questions[] = {
+        {"What is the capital of France?", {"Berlin", "Madrid", "Paris", "Rome"}, 3},
+        {"Which planet is known as the Red Planet?", {"Earth", "Mars", "Jupiter", "Venus"}, 2},
+        {"Who wrote 'Hamlet'?", {"Charles Dickens", "William Shakespeare", "Leo Tolstoy", "Mark Twain"}, 2},
+        {"What is the largest mammal?", {"Elephant", "Blue Whale", "Giraffe", "Orca"}, 2}
+    };
+int numQuestions = sizeof(questions) / sizeof(questions[0]);
+int score = 0;
+    cout << "Welcome to the Quiz Game!\n";
+    cout << "---------------------------\n";
+    for (int i = 0; i < numQuestions; i++) {
+        cout << "Question " << i + 1 << "/" << numQuestions << ":\n";
+        askQuestion(questions[i], score);
+    }
+    cout << "Quiz Over!\n";
+    cout << "Your final score is: " << score << " out of " << numQuestions << "\n";
+    if (score == numQuestions) {
+        cout << "Excellent work!\n";
+    } else if (score >= numQuestions / 2) {
+        cout << "Good effort!\n";
+    } else {
+        cout << "Better luck next time!\n";
+    }
+return 0;
+}
